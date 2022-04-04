@@ -5,9 +5,9 @@ def add_todo():
     with open("todo.json", 'r') as json_file:
         try:
             data = json.load(json_file)
-            todo_name = len(data)
+            # having a mental breakdown trying to maintain the dictionary when adding a new entry.
         except:
-            todo_name = 0
+            todo_name = 1
     data[f'{todo_name+1}'] = entry
     with open("todo.json", "w") as jsonFile:
         json.dump(data, jsonFile)
@@ -15,24 +15,27 @@ def add_todo():
         
 def delete_todo():
     del_line = "."
-    with open("todo.json", 'r') as json_file:
-        data = json.load(json_file)
+    with open("todo.json", 'r') as json_read:
+        data = json.load(json_read)
     if data != {}:
         print("Todo list items:")
         for i in data:
-            print(f'{data[i]} - {i}')
-        while del_line.isnumeric() == False:
-            del_line = input("Which entry do you want to delete ?\n-> ")
-            try:
-                if del_line in data[del_line]:
-                    del data[del_line]
-            except:
-                print("There is no such entry!")
-        with open('todo.json', 'w') as json_file:
-            json.dump(data, json_file)
-            print("Successfully deleted the todo item!")
-    else:
-        print("No items to delete!")
+            print(f'{data[i]} - {i}')      
+    else: return -1  
+    while del_line.isnumeric() == False:
+        del_line = input("Which entry do you want to delete ?\n-> ")
+    try:
+        if del_line in data:
+            data.pop(data[del_line])
+        print(data)
+    except:
+        print("There is no such entry!")
+        return -1
+    
+    with open('todo.json', 'w') as json_write:
+        json.dump(data, json_write)
+        print("Successfully deleted the todo item!")
+
     
 def show_todo():
     with open("todo.json") as f:
