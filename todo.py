@@ -62,9 +62,9 @@ def delete_todo():
             separator()          # Run this block instead and return False  |
             print("There is no such entry, deletion cancelled.")
             separator()
-            return False                                  # If all of the   |
+            return False                                  # If all of that  |
     else:                                                 # fails, the todo |
-        print("There are no entries in the todo list!")   # list is empty.. |
+        print("There are no entries in the todo list!")   # list is empty:  |
         return False                                      # Return False    |
 
 
